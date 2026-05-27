@@ -15,9 +15,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MONGO_URI = os.environ.get("MONGO_URI", "mongodb://ISIS2304H26202610:fyVSGbDzWt2h@157.253.236.88:8087")
+MONGO_URI = os.environ.get("MONGO_URI", "mongodb://ISIS2304H27202610:fyVSGbDzWt2h@157.253.236.88:8087")
 client = MongoClient(MONGO_URI)
-db = client["ISIS2304H26202610"]
+db = client["ISIS2304H27202610"]
 resenas = db["resenas"]
 votos = db["votos_utilidad"]
 
