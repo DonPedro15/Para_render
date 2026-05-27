@@ -207,13 +207,17 @@ def evolucion(id_hotel: int, anio: int):
     ]
     return list(resenas.aggregate(pipeline))
 
-# ==================== RFC3: Comparativo ciudad (sin colección hoteles, usa mapeo fijo) ====================
-# Mapeo de ciudad a lista de id_hotel (debes ajustar según tus datos reales)
-CIUDAD_HOTELES = {
-    "Bogotá": [1, 2, 3],
-    "Medellín": [4, 5, 6],
-    "Cali": [7, 8, 9]
-}
+# ==================== OBTENER HOTELES ====================
+@app.get("/hoteles")
+def obtener_hoteles():
+    """Retorna lista de hoteles desde MongoDB"""
+    try:
+        hoteles_list = list(db["hoteles"].find({}, {"_id": 0}))
+        if not hoteles_list:
+            return {"error": "No hay hoteles registrados"}
+        return hoteles_list
+    except Exception as e:
+        return {"error": str(e)}
 
 @app.get("/rfc3/comparativo/{ciudad}")
 def comparativo(ciudad: str):
